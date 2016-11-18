@@ -3,8 +3,8 @@
 	<head>
   
   
-	  <title>jQuery Mobile test page</title>
-	  <meta charset=utf-8 />
+	  <title>PWS Time Keeping</title>
+	  <meta charset="utf-8" />
 	  <meta name="viewport" content="width=device-width, initial-scale=1">
 	  
 	  <link rel="stylesheet"  href="resources/jquery.mobile-git.css" /> 
@@ -17,7 +17,6 @@
   
 	</head>
 	<body>
-	
 		<div data-role="page" id="clockInPage" data-theme="b">
 			<div data-role="header" id="header">
 				<h1>Pacific West Sound</h1>
@@ -32,10 +31,12 @@
 				</div>
 			</div>
 			<img src="img/paclogo.png" id="logo">
-			<select name="location-list" id="location-list">
-				<option>Location A</option>
-				<option>Location B</option>
-			</select>
+			<div class="select-wrapper">
+				<select name="location-list" id="location-list">
+					<option>Location A</option>
+					<option>Location B</option>
+				</select>
+			</div>
 			<button class="ui-btn" id="clockin">Clock In</button>
 			<button class="ui-btn" id="clockout">Clock Out</button>
 			<div data-role="footer" data-position="fixed" data-fullscreen="true">
@@ -66,28 +67,63 @@
 			</div>
 			<div data-role="collapsible" id="start-time-selection">
 				<h1>Start Time</h1>
-				<div class="hour">
-					<select name="start-hour" id="start-hour">
-						<option>1</option>
-						<option>2</option>
-						<option>12</option>
-					</select>
-				</div>
-				<div class="minute">
-					<select name="start-minute" id="start-minute">
-						<option>00</option>
-						<option>01</option>
-						<option>12</option>
-					</select>
-				</div>
-				<div class="time-of-day">
-					<select name="start-am-pm" id="start-am-pm">
-						<option>AM</option>
-						<option>PM</option>
-					</select>
+				<div class="time-wrapper">
+					<div class="hour">
+						<select name="start-hour" id="start-hour">
+						</select>
+					</div>
+					<div class="minute">
+						<select name="start-minute" id="start-minute">
+						</select>
+					</div>
+					<div class="time-of-day">
+						<select name="start-am-pm" id="start-am-pm">
+						</select>
+					</div>
 				</div>
 			</div>
-			<button class="ui-btn" id="submit">Submit</button>
+			<div data-role="collapsible" id="end-time-selection">
+				<h1>End Time</h1>
+				<div class="time-wrapper">
+					<div class="hour">
+						<select name="end-hour" id="end-hour">
+						</select>
+					</div>
+					<div class="minute">
+						<select name="end-minute" id="end-minute">
+						</select>
+					</div>
+					<div class="time-of-day">
+						<select name="end-am-pm" id="end-am-pm">
+						</select>
+					</div>
+				</div>
+			</div>
+			<button class="ui-btn" id="submit-late">Submit</button>
+		</div>
+		<div data-role="page" id="search" data-theme="b">
+			<div data-role="header" id="header">
+				<h1>Pacific West Sound</h1>
+			</div>
+			<div data-role="header" id="header">
+				<div data-role="navbar" id="navbar">
+					<ul>
+						<li><a href="#clockInPage" data-icon="clock">Clock In</a></li>
+						<li><a href="#latepunch" data-icon="calendar">Late Punch</a></li>
+						<li><a href="#search" data-icon="search">Search</a></li>
+					</ul>
+				</div>
+			</div>
+			<img src="img/paclogo.png" id="logo">
+			<div data-role="collapsible" id="searchpunchstartdate">
+				<h1>Start Date</h1>	
+				<input type="text" id="search-start-date">
+			</div>
+			<div data-role="collapsible" id="searchpunchenddate">
+				<h1>End Date</h1>
+				<input type="text" id="search-end-date">
+			</div>
+			<button class="ui-btn" id="submit-search">Submit</button>
 		</div>
 		<script>
   
@@ -100,6 +136,18 @@
 			$("#latepunchenddate").datepicker( {
 				onSelect: function(date) {
 					document.getElementById("end-date").value = date;
+				}
+			});
+			
+			$("#searchpunchstartdate").datepicker( {
+				onSelect: function(date) {
+					document.getElementById("search-start-date").value = date;
+				}
+			});
+			
+			$("#searchpunchenddate").datepicker( {
+				onSelect: function(date) {
+					document.getElementById("search-end-date").value = date;
 				}
 			});
 			

@@ -6,21 +6,21 @@
 	margin-top: 20px;
 }
 
-#date, #clockinb, #clockoutb, #latepunchstartdate, #latepunchenddate {
+#date, #clockinb, #clockoutb, #latepunchstartdate, #latepunchenddate, #searchpunchstartdate, #searchpunchenddate {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
 }
 
-#start-time-selection {
-	width: 339px;
+#start-time-selection, #end-time-selection {
+	max-width: 337px;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-#submit, #clockin, #clockout, #date-input {
-	width: 337px;
+#submit-late, #clockin, #clockout, #date-input, #submit-search{
+	max-width: 337px;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -39,7 +39,6 @@
 .hour {
 	display: inline-block;
 	width: 85px;
-	margin-left: 12px;
 }
 
 .minute {
@@ -50,4 +49,19 @@
 .time-of-day {
 	display: inline-block;
 	width: 85px;
+}
+
+.time-wrapper {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+.select-wrapper {
+	max-width: 337px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 25px;
 }
