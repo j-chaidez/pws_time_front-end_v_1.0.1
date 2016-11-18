@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+  
+  
+	  <title>jQuery Mobile test page</title>
+	  <meta charset=utf-8 />
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  
+	  <link rel="stylesheet"  href="http://code.jquery.com/mobile/git/jquery.mobile-git.css" /> 
+	  <link rel="stylesheet" href="https://rawgithub.com/arschmitz/jquery-mobile-datepicker-wrapper/master/jquery.mobile.datepicker.css" />
+	  <link rel="stylesheet" href="main.css">
+	  <script src="http://code.jquery.com/jquery-1.9.1.js"></script> 
+	  <script src="https://rawgithub.com/jquery/jquery-ui/1-10-stable/ui/jquery.ui.datepicker.js"></script>
+	  <script src="http://code.jquery.com/mobile/git/jquery.mobile-git.js"></script> 
+	  <script src="https://rawgithub.com/arschmitz/jquery-mobile-datepicker-wrapper/master/jquery.mobile.datepicker.js"></script>
+  
+	</head>
+	<body>
+	
+		<div data-role="page" id="clockInPage" data-theme="b">
+			<div data-role="header" id="header">
+				<h1>Pacific West Sound</h1>
+			</div>
+			<div data-role="header" id="header">
+				<div data-role="navbar" id="navbar">
+					<ul>
+						<li><a href="#clockInPage" data-icon="clock">Clock In</a></li>
+						<li><a href="#latepunch" data-icon="calendar">Late Punch</a></li>
+						<li><a href="#" data-icon="search">Search</a></li>
+					</ul>
+				</div>
+			</div>
+			<img src="../../includes/img/p_logo.png" id="logo">
+			<button class="ui-btn" id="clockin">Clock In</button>
+			<button class="ui-btn" id="clockout">Clock Out</button>
+			<div data-role="footer" data-position="fixed" data-fullscreen="true">
+			</div>
+		</div>
+		
+		<div data-role="page" id="latepunch" data-theme="b">
+			<div data-role="header" id="header">
+				<h1>Pacific West Sound</h1>
+			</div>
+			<div data-role="header" id="header">
+				<div data-role="navbar" id="navbar">
+					<ul>
+						<li><a href="#clockInPage" data-icon="clock">Clock In</a></li>
+						<li><a href="#latepunch" data-icon="calendar">Late Punch</a></li>
+						<li><a href="#search" data-icon="search">Search</a></li>
+					</ul>
+				</div>
+			</div>
+			<img src="../../includes/img/p_logo.png" id="logo">
+			<div data-role="collapsible" id="latepunchstartdate">
+				<h1>Start Date</h1>	
+				<input type="text" id="start-date">
+			</div>
+			<div data-role="collapsible" id="latepunchenddate">
+				<h1>End Date</h1>
+				<input type="text" id="end-date">
+			</div>
+			<button class="ui-btn" id="submit">Submit</button>
+		</div>
+		<script>
+  
+			$("#latepunchstartdate").datepicker( {
+				onSelect: function(date) {
+					document.getElementById("start-date").value = date;
+				}
+			});
+			
+			$("#latepunchenddate").datepicker( {
+				onSelect: function(date) {
+					document.getElementById("end-date").value = date;
+				}
+			});
+			
+			function putInside(item) {
+				document.getElementById("fullname").value = item;
+			}
+		</script>
+	</body>
+</html>
+	

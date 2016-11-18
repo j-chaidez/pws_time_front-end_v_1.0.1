@@ -1,0 +1,31 @@
+#logo {
+	display: block;
+	width: 100px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+}
+
+#date, #clockinb, #clockoutb, #latepunchstartdate, #latepunchenddate {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+#submit, #clockin, #clockout, #date-input {
+	width: 337px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#header, #navbar {
+	max-width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#latepunch {
+	overflow-x: hidden;
+	overflow-y: auto;
+}
