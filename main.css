@@ -13,6 +13,12 @@
 	text-align: center;
 }
 
+#start-time-selection {
+	width: 339px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 #submit, #clockin, #clockout, #date-input {
 	width: 337px;
 	margin-left: auto;
@@ -28,4 +34,20 @@
 #latepunch {
 	overflow-x: hidden;
 	overflow-y: auto;
+}
+
+.hour {
+	display: inline-block;
+	width: 85px;
+	margin-left: 12px;
+}
+
+.minute {
+	display: inline-block;
+	width: 100px;
+}
+
+.time-of-day {
+	display: inline-block;
+	width: 85px;
 }
