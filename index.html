@@ -59,15 +59,8 @@
 				</select>
 			</div>
 			<div data-role="collapsible" id="latepunchstartdate">
-				<h1>Start Date</h1>	
+				<h1>Punch In</h1>	
 				<input type="text" id="start-date">
-			</div>
-			<div data-role="collapsible" id="latepunchenddate">
-				<h1>End Date</h1>
-				<input type="text" id="end-date">
-			</div>
-			<div data-role="collapsible" id="start-time-selection">
-				<h1>Start Time</h1>
 				<div class="time-wrapper">
 					<div class="hour">
 						<select name="start-hour" id="start-hour">
@@ -86,8 +79,9 @@
 					</div>
 				</div>
 			</div>
-			<div data-role="collapsible" id="end-time-selection">
-				<h1>End Time</h1>
+			<div data-role="collapsible" id="latepunchenddate">
+				<h1>Punch Out</h1>
+				<input type="text" id="end-date">
 				<div class="time-wrapper">
 					<div class="hour">
 						<select name="end-hour" id="end-hour">
@@ -134,9 +128,7 @@
 		</div>
 		<script src="app.js"></script>
 		<script>
-		
 			function fillTime() {
-			
 				var startHours = document.getElementById("start-hour")
 				var endHours = document.getElementById("end-hour");
 				var startMinute = document.getElementById("start-minute");
@@ -194,10 +186,6 @@
 					document.getElementById("search-end-date").value = date;
 				}
 			});
-			
-			function putInside(item) {
-				document.getElementById("fullname").value = item;
-			}
 		</script>
 	</body>
 </html>

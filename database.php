@@ -17,11 +17,12 @@
 				die("Connection failed: " . $this->con->connect_error);
 				echo "Connection failed: " . $this->con->connect_error;
 			} else {
-				echo "Connected successfully";
+				return "Connected successfully";
 			}
 			
 		}
 	}
+	
+	return $database = new Database();
 	echo "HELLO";
-	$database = new Database();
 	
