@@ -17,6 +17,7 @@
 				die("Connection failed: " . $this->con->connect_error);
 				echo "Connection failed: " . $this->con->connect_error;
 			} else {
+				echo "testing db"
 				return "Connected successfully";
 			}
 			

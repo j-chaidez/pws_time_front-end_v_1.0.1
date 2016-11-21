@@ -10,9 +10,12 @@
 	  <script src="resources/jquery.ui.datepicker.js"></script>
 	  <script src="resources/jquery.mobile-git.js"></script> 
 	  <script src="resources/jquery.mobile.datepicker.js"></script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js"></script>
 	  <link rel="stylesheet" href="main.css">
 	</head>
 	<body>
+		<div id="modal-load" class="modal-hidden"></div>
+		<img src="img/loader.gif" id="boot-progress" class="modal-hidden">
 		<div data-role="page" id="clockInPage" data-theme="b">
 			<div data-role="header" id="header">
 				<h1>Pacific West Sound</h1>
@@ -29,13 +32,23 @@
 			<img src="img/paclogo.png" id="logo">
 			<div class="select-wrapper">
 				<select name="location-list" id="location-list">
-					<option>Location A</option>
-					<option>Location B</option>
+					<option>SELECT LOCATION</option>
 				</select>
 			</div>
 			<button class="ui-btn" id="clockin">Clock In</button>
 			<button class="ui-btn" id="clockout">Clock Out</button>
+			<div id="clock-in-label-container" class='label-none'>
+				<h4 id="clock-in-time-label"></h4>
+			</div>
+			<img src="img/loader.gif" id="clock-in-progress" class="hidden">
 			<div data-role="footer" data-position="fixed" data-fullscreen="true">
+			</div>
+			<div data-role="popup" id="locationError" data-transition="fade" style="width: 250px; padding: 10px;">
+				<div data-role="header"><h1>Error</h1></div>
+				<h2>Whoops!</h2>
+				<p>You must enter a location</p>
+				<a href="#clockInPage" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b ui-icon-back ui-btn-icon-left" data-rel="back">Go Back</a>
+				</div>
 			</div>
 		</div>
 		<div data-role="page" id="latepunch" data-theme="b">
@@ -54,14 +67,13 @@
 			<img src="img/paclogo.png" id="logo">
 			<div class="select-wrapper">
 				<select name="location-list-late" id="location-list-late">
-						<option>Location A</option>
-						<option>Location B</option>
+					<option>SELECT LOCATION</option>
 				</select>
 			</div>
 			<div data-role="collapsible" id="latepunchstartdate">
 				<h1>Punch In</h1>	
 				<input type="text" id="start-date">
-				<div class="time-wrapper">
+				<div id="start-time-wrapper" class="time-wrapper">
 					<div class="hour">
 						<select name="start-hour" id="start-hour">
 						</select>
@@ -82,7 +94,7 @@
 			<div data-role="collapsible" id="latepunchenddate">
 				<h1>Punch Out</h1>
 				<input type="text" id="end-date">
-				<div class="time-wrapper">
+				<div id="end-time-wrapper" class="time-wrapper">
 					<div class="hour">
 						<select name="end-hour" id="end-hour">
 						</select>
@@ -100,7 +112,18 @@
 					</div>
 				</div>
 			</div>
+			<div id="flip-wrapper">
+				<label for="switch">Stay Clocked In</label>
+				<input type="checkbox" id="stay-in" data-role="flipswitch" name="switch" id="switch" data-on-text="Yes" data-off-text="No">
+			</div>
 			<button class="ui-btn" id="submit-late">Submit</button>
+			<div data-role="popup" id="latePunchError" data-transition="fade" style="width: 250px; padding: 10px;">
+				<div data-role="header"><h1>Error</h1></div>
+				<h2>Hooray!</h2>
+				<p>Your punch was submitted successfully!</p>
+				<a href="#clockInPage" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b ui-icon-back ui-btn-icon-left" data-rel="back">Go Back</a>
+				</div>
+			</div>
 		</div>
 		<div data-role="page" id="search" data-theme="b">
 			<div data-role="header" id="header">
@@ -133,8 +156,6 @@
 				var endHours = document.getElementById("end-hour");
 				var startMinute = document.getElementById("start-minute");
 				var endMinute = document.getElementById("end-minute");
-				alert(startMinute)
-				alert(startHours);
 				for (var i = 1; i <= 59; i++) {
 					var optionStart = document.createElement("OPTION");
 					var optionEnd = document.createElement("OPTION");

@@ -13,6 +13,10 @@
 	text-align: center;
 }
 
+#latepunchenddate {
+	margin-bottom: 25px;
+}
+
 #start-time-selection, #end-time-selection {
 	max-width: 337px;
 	margin-left: auto;
@@ -64,4 +68,68 @@
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 25px;
+}
+
+#clock-in-progress {
+	width: 110px;
+	height: 140px;
+	display: block;
+	margin: 0px auto;
+}
+
+.hidden {
+	visibility: hidden;
+}
+
+.modal-shown {
+	display: block;
+}
+.modal-hidden {
+	display: none;
+}
+
+#modal-load {
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	opacity: 0.7;
+}
+
+#boot-progress {
+	width: 150px;
+	height: 190px;
+	margin-top: 180px;
+	margin-left: auto;
+	margin-right: auto;
+	z-index: 2;
+	position: relative;
+}
+
+#clock-in-time-label {
+	display: block;
+}
+
+#clock-in-label-container {
+	width: 337px;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.label-none {
+	display: none;
+}
+
+.label-visible {
+	display: block;
+}
+
+#flip-wrapper {
+	width: 337px;
+	display: block;
+	margin: auto;
 }
