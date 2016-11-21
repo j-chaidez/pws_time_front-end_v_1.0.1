@@ -66,7 +66,7 @@
 		
 		clockIn: function() {
 			clockInButton.disabled = true;
-			userLocation = document.getElementById("location-list").value;
+			userLocation = document.getElementById("location-list");
 			app.findPrevailing(userLocation);
 			return new Promise(function(resolve, reject) {
 				var xhttp = new XMLHttpRequest();
@@ -125,8 +125,9 @@
 		},
 		
 		latePunchIn: function() {
+			
 			latePunchSubmit.disabled = true;
-			var locationEntry = document.getElementById('location-list-late').value;
+			var locationEntry = document.getElementById('location-list-late');
 			var startDate = document.getElementById("start-date");
 			var endDate = document.getElementById("end-date");
 			var startTimeDiv = document.getElementById("start-time-wrapper");
@@ -140,9 +141,11 @@
 			var flipSwitch = document.getElementById("stay-in");
 			var modifiedStartHour = 0; 
 			var modifiedEndHour = 0;
+			var punchIn = '';
+			var punchOut = '';
 			var stayIn = false;
 			var elementArray = [startDate, endDate, startHour, startMinute,
-								timeOfDayStart, endHour, endMinute, timeOfDayEnd, locationListLate];
+								timeOfDayStart, endHour, endMinute, timeOfDayEnd, locationEntry];
 								
 			for (var item in elementArray) {
 				if(elementArray[item].value.length === 0 || elementArray[item].value === "SELECT LOCATION") {
@@ -154,10 +157,14 @@
 			
 			if (timeOfDayStart.value === "PM" && startHour.value !== 12) {
 				modifiedStartHour = parseInt(startHour.value) + 12;
+			} else {
+				modifiedStartHour = parseInt(startHour.value);
 			}
 			
 			if (timeOfDayEnd.value === "PM" && endHour.value !== 12) {
 				modifiedEndHour = parseInt(endHour.value) + 12;
+			} else {
+				modifiedEndHour = parseInt(endHour.value);
 			}
 			
 			if (flipSwitch.checked) {
@@ -165,8 +172,14 @@
 				clockInButton.disabled = true;
 			}
 			
-			var sqlStartDate = app.convertDate(startDate);
-			var sqlEndDate = app.convertDate(endDate);
+			var sqlStartDate = app.convertDate(startDate.value);
+			var sqlEndDate = app.convertDate(endDate.value);
+			
+			punchIn = sqlStartDate + " " + modifiedStartHour + ":" + startMinute.value + ":00";
+			punchOut = sqlEndDate + " " + modifiedEndHour + ":" + endMinute.value + ":00";
+			
+			console.log(punchIn);
+			console.log(punchOut);
 			
 			return new Promise(function(resolve, reject) {
 				var xhttp = new XMLHttpRequest();
@@ -177,6 +190,8 @@
 						if (response === "sitrue" || response === "lptrue") {
 							$("#latePunchError").popup("open");
 							resolve(response);
+						} else {
+							alert("There was a problem with your request");
 						}
 					} else {
 						clockInButton.disabled = false;
@@ -185,7 +200,9 @@
 				}
 				xhttp.open("POST", "http://localhost:9080/pws_timecards/includes/timeclock.php", true);
 				xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-				xhttp.send();
+				xhttp.send("latePunch=true" + "&stayIn=" + stayIn + "&location=" + locationEntry
+						   + "&prevailing=" + locationPrevailing + "&username=" + userName
+						   + "&punchIn=" );
 			});
 			
 		},
@@ -230,7 +247,7 @@
 					orDate += str[i];
 				}
 			}
-			return dateArray;
+			return dateArray[2] + "-" + dateArray[0] + "-" + dateArray[1];
 		},
 		
 		clockInProgress: function(inProgress) {
@@ -261,7 +278,7 @@
 		
 		findPrevailing: function(userLocation) {
 			for (var index in locationTracker) {
-				if (locationTracker[index].name === userLocation) {
+				if (locationTracker[index].name === userLocation.value) {
 					locationPrevailing = locationTracker[index].prevailing;
 				}
 			}
